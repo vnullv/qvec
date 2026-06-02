@@ -3,9 +3,9 @@
 BasedOnStyle: LLVM
 
 # ====================== Indentation ======================
-IndentWidth: 4
+IndentWidth: 8
 TabWidth: 8
-UseTab: ForIndentation          
+UseTab: Always
 IndentCaseLabels: false         # case labels at same level as switch
 IndentGotoLabels: false
 IndentPPDirectives: None   
