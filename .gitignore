@@ -53,3 +53,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+.cache/
+bin/
+obj/
+compile_commands.json
+.nvim.lua

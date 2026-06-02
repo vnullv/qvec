@@ -1,0 +1,73 @@
+---
+
+BasedOnStyle: LLVM
+
+# ====================== Indentation ======================
+IndentWidth: 4
+TabWidth: 8
+UseTab: ForIndentation          
+IndentCaseLabels: false         # case labels at same level as switch
+IndentGotoLabels: false
+IndentPPDirectives: None   
+IndentAccessModifiers: false
+
+# ====================== Brace Style ======================
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never     # K&R style
+  AfterEnum: false
+  AfterFunction: false             
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeWhile: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+
+BreakBeforeBraces: Linux         
+
+# ====================== Spacing ======================
+SpaceBeforeParens: ControlStatements
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeRangeBasedForLoopColon: false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# ====================== Line breaking ======================
+ColumnLimit: 100                   
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None
+AllowShortCaseLabelsOnASingleLine: false
+
+# ====================== Other ======================
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: true
+AlignAfterOpenBracket: Align
+AlignOperands: true
+AlignTrailingComments: true
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+NamespaceIndentation: None
+FixNamespaceComments: false
+
+BinPackArguments: true
+BinPackParameters: true
+
+Language: C
+
+...
