@@ -13,5 +13,7 @@ int  qvec_create(qvec_t** v, size_t elem_size);
 void qvec_free(qvec_t* v);
 
 int qvec_append(qvec_t* v, void* data);
+int qvec_prepend(qvec_t* v, void* data);
+int qvec_insert(qvec_t* v, size_t i, void* data);
 
 #endif

@@ -17,7 +17,15 @@ int main(void)
 
     int x = 199;
     qvec_append(v, &x);
-    qvec_debug_print(v, print_int);
+    qvec_append(v, &x);
+    qvec_append(v, &x);
+    qvec_append(v, &x);
+    qvec_append(v, &x);
+    qvec_append(v, &x);
 
+    x = 2;
+    qvec_insert(v, 6, &x);
+
+    qvec_debug_print(v, print_int);
     qvec_free(v);
 }

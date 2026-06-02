@@ -1,6 +1,8 @@
 #include "qvec/vector.h"
 
+#include <errno.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -46,6 +48,52 @@ int qvec_append(qvec_t* v, void* data)
     return 0;
 }
 
+int qvec_prepend(qvec_t* v, void* data)
+{
+    if (_qvec_ensure_cap(v, 1) != 0)
+	return -1;
+
+    memmove(v->data + v->elem_size, v->data, v->size * v->elem_size);
+
+    // insert at first elem
+    memcpy(v->data, data, v->elem_size);
+    v->size++;
+
+    return 0;
+}
+
+int qvec_insert(qvec_t* v, size_t i, void* data)
+{
+    void*  blk;
+    size_t blk_size_b;
+
+    if (i > v->size) {
+	errno = ERANGE;
+	return -1;
+    }
+
+    if (_qvec_ensure_cap(v, 1) != 0)
+	return -1;
+
+    blk = (char*)v->data + (i * v->elem_size);
+    blk_size_b = (v->size - i) * v->elem_size;
+    memmove(blk + v->elem_size, blk, blk_size_b);
+
+    memcpy(blk, data, v->elem_size);
+    v->size++;
+
+    return 0;
+}
+
+/* Debug functions. Defined in "qvec/debug.h" */
+void qvec_debug_print(qvec_t* v, void (*cb)(void const*))
+{
+    size_t i;
+    for (i = 0; i < v->size; ++i) {
+	cb((char*)v->data + (i * v->elem_size));
+    }
+}
+
 static int _qvec_ensure_cap(qvec_t* v, size_t add)
 {
     size_t req, new_cap;
@@ -65,13 +113,4 @@ static int _qvec_ensure_cap(qvec_t* v, size_t add)
     v->cap = new_cap;
 
     return 0;
-}
-
-/* Debug functions. Defined in "qvec/debug.h" */
-void qvec_debug_print(qvec_t* v, void (*cb)(void const*))
-{
-    size_t i;
-    for (i = 0; i < v->size; ++i) {
-	cb((char*)v->data + (i * v->elem_size));
-    }
 }
