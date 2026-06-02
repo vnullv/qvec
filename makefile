@@ -2,7 +2,7 @@
 # compiler and flags
 CC        := gcc
 OPTLVL    := -O2
-CFLAGS    := $(OPTLVL) -Wall -Wextra -std=c99 -MMD -MP
+CFLAGS    := $(OPTLVL) -Wall -Wextra -Wpointer-arith -std=c99 -MMD -MP
 LIB       := 
 INC       := -Iinc/
 

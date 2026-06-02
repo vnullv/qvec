@@ -59,3 +59,4 @@ bin/
 obj/
 compile_commands.json
 .nvim.lua
+docs/

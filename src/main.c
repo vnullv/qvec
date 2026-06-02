@@ -13,7 +13,7 @@ void print_int(void const* v)
 int main(void)
 {
 	qvec_t* v;
-	QVECTOR_CREATE(int, v);
+	QVEC_CREATE(int, v);
 
 	int x = 199;
 	qvec_append(v, &x);
