@@ -137,6 +137,14 @@ int qvec_reserve(qvec_t* v, size_t new_cap);
  */
 int qvec_shrink(qvec_t* v);
 
+/**
+ * @brief Perform an action for each element of the vector
+ *
+ * @param v Vector to iterate.
+ * @param cb Callback function. Takes a const void* to the element
+ */
+void qvec_foreach(qvec_t* v, void (*cb)(void const*));
+
 /* Searching and sorting */
 
 /**

@@ -1,4 +1,3 @@
-#include "qvec/debug.h"
 #include "qvec/vector.h"
 
 #include <stdio.h>
@@ -8,6 +7,17 @@ void print_int(void const* v)
 	if (!v)
 		return;
 	printf("%d\n", *(int*)v);
+}
+
+int int_compar(void const* a, void const* b)
+{
+	int x = *(int const*)a;
+	int y = *(int const*)b;
+
+	if (x == y)
+		return 0;
+
+	return (x < y) ? -1 : 1;
 }
 
 int main(void)
@@ -23,9 +33,11 @@ int main(void)
 	qvec_append(v, &x);
 	qvec_append(v, &x);
 
-	x = 2;
-	qvec_insert(v, 6, &x);
+	qvec_remove(v, 2);
 
-	qvec_debug_print(v, print_int);
+	x = 2;
+	qvec_insert(v, qvec_size(v), &x);
+
+	qvec_foreach(v, print_int);
 	qvec_free(v);
 }

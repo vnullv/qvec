@@ -1,6 +1,7 @@
 #include "qvec/vector.h"
 
 #include <errno.h>
+#include <search.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -106,9 +107,18 @@ void qvec_pop(qvec_t* v)
 {
 	v->size--;
 }
-// implement this later..
+
 void qvec_remove(qvec_t* v, size_t i)
 {
+	void * dest, *blk;
+	size_t blk_size_b;
+
+	dest = (char*)v->data + i * v->elem_size;
+	blk = (char*)v->data + (i + 1) * v->elem_size;
+	blk_size_b = (v->size - i - 1) * v->elem_size;
+	memmove(dest, blk, blk_size_b);
+
+	v->size--;
 }
 
 size_t qvec_size(qvec_t const* v)
@@ -158,22 +168,24 @@ int qvec_shrink(qvec_t* v)
 	return 0;
 }
 
-// implement these two later...
-void* qvec_find(qvec_t const* v, void const* key, int (*cmp_cb)(void const*, void const*))
-{
-	return NULL;
-}
-void qvec_sort(qvec_t* v, int (*cmp_cb)(void const*, void const*))
-{
-}
-
-/* Debug functions. Defined in "qvec/debug.h" */
-void qvec_debug_print(qvec_t* v, void (*cb)(void const*))
+void qvec_foreach(qvec_t* v, void (*cb)(void const*))
 {
 	size_t i;
+
 	for (i = 0; i < v->size; ++i) {
 		cb((char*)v->data + (i * v->elem_size));
 	}
+}
+
+void* qvec_find(qvec_t const* v, void const* key, int (*compar)(void const*, void const*))
+{
+	size_t s = v->size;
+
+	return lfind(key, v->data, &s, v->elem_size, compar);
+}
+void qvec_sort(qvec_t* v, int (*compar)(void const*, void const*))
+{
+	qsort(v->data, v->size, v->elem_size, compar);
 }
 
 static int _qvec_ensure_cap(qvec_t* v, size_t add)
