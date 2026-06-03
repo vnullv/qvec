@@ -55,8 +55,7 @@ dkms.conf
 *.dwo
 
 .cache/
-bin/
-obj/
+build/
 compile_commands.json
 .nvim.lua
 docs/

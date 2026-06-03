@@ -9,7 +9,7 @@
  * @param t Type of vector elements
  * @param v Qvec pointer
  */
-#define QVEC_CREATE(t, v) qvec_create(&(v), sizeof(t));
+#define QVEC_CREATE(t, v) qvec_create(&(v), sizeof(t))
 
 typedef struct qvec qvec_t;
 
